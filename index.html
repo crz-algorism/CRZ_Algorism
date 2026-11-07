@@ -418,6 +418,25 @@ footer span { color: var(--red); }
 @media(max-width: 480px) {
   .skills-grid, .lab-grid { grid-template-columns: 1fr; }
 }
+  .about-content {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  flex-wrap: wrap;
+}
+
+.about-photo img {
+  width: 280px;
+  max-width: 100%;
+  border-radius: 15px;
+  border: 2px solid #8b0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.about-text {
+  flex: 1;
+  min-width: 250px;
+}
 </style>
 </head>
 
