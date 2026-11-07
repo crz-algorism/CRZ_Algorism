@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="CRZ_Algorism | Web Developer, Programmer, Data Analyst and Cybersecurity Enthusiast.">
+
+<title>CRZ_Algorism | Cyber Developer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&family=Fira+Code:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --red: #ff3030;
+  --red-dark: #a00000;
+  --bg: #080808;
+  --panel: #101010;
+  --text: #eeeeee;
+  --muted: #888;
+  --green: #00ff88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255,255,255,.015) 1px,
+    transparent 1px
+  ), linear-gradient(
+    90deg,
+    rgba(255,255,255,.015) 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#matrix {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  opacity: .13;
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  height: 75px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9%;
+  background: rgba(8,8,8,.92);
+  border-bottom: 1px solid #292020;
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  color: var(--red);
+  font-weight: 800;
+  text-shadow: 0 0 15px #ff303080;
+}
+
+.logo span { color: white; }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #aaa;
+  font-size: 12px;
+  transition: .3s;
+}
+
+.nav-links a:hover { color: var(--red); }
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--red);
+  font-size: 26px;
+  cursor: pointer;
+}
+
+section {
+  padding: 110px 10%;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-content { max-width: 850px; }
+
+.tag {
+  color: var(--green);
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(40px, 8vw, 85px);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--red);
+  text-shadow: 0 0 30px #ff303055;
+}
+
+.hero h2 {
+  color: #aaa;
+  font-size: clamp(16px, 3vw, 25px);
+  margin-bottom: 25px;
+}
+
+.hero p {
+  max-width: 650px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 13px;
+}
+
+.terminal {
+  background: #0d0d0d;
+  border: 1px solid #502020;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 35px;
+  max-width: 600px;
+  box-shadow: 0 0 30px #ff000010;
+}
+
+.terminal-head {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+
+.red { background: #ff4444; }
+.yellow { background: #ffcc33; }
+.green { background: #00dd77; }
+
+.terminal p {
+  color: var(--green);
+  font-size: 12px;
+  line-height: 2;
+}
+
+.terminal .white { color: white; }
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: var(--red);
+  animation: blink .8s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 13px 24px;
+  border: 1px solid var(--red);
+  color: white;
+  font-size: 12px;
+  transition: .3s;
+}
+
+.btn.primary {
+  background: var(--red);
+  color: white;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #111;
+  box-shadow: 0 0 20px var(--red);
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.section-title span { color: var(--red); }
+
+.subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 45px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+.about-text {
+  color: #aaa;
+  line-height: 2;
+  font-size: 13px;
+}
+
+.about-text strong { color: var(--red); }
+
+.info-card, .skill-card, .project-card, .lab-card {
+  background: var(--panel);
+  border: 1px solid #292020;
+  padding: 25px;
+  transition: .3s;
+}
+
+.info-card:hover, .skill-card:hover,
+.project-card:hover, .lab-card:hover {
+  border-color: var(--red);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #ff303015;
+}
+
+.info-card h3, .skill-card h3,
+.project-card h3, .lab-card h3 {
+  color: var(--red);
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.info-card p {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 2.1;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.skill-card p, .project-card p, .lab-card p {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.skill-icon {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.skill-bar {
+  background: #252525;
+  height: 5px;
+  margin-top: 18px;
+}
+
+.skill-bar div {
+  height: 100%;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.project-card {
+  min-height: 190px;
+}
+
+.project-card small {
+  color: var(--green);
+  font-size: 10px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.project-link {
+  display: inline-block;
+  color: var(--red);
+  font-size: 11px;
+  margin-top: 20px;
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.lab-card {
+  text-align: center;
+}
+
+.lab-card .icon { font-size: 35px; margin-bottom: 15px; }
+
+.contact-box {
+  border: 1px solid #502020;
+  background: #100909;
+  text-align: center;
+  padding: 55px 20px;
+}
+
+.contact-box p {
+  color: #999;
+  font-size: 13px;
+  margin: 20px 0;
+  line-height: 2;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.socials a {
+  border: 1px solid #444;
+  padding: 12px 20px;
+  font-size: 11px;
+  transition: .3s;
+}
+
+.socials a:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+footer {
+  padding: 25px;
+  border-top: 1px solid #292020;
+  text-align: center;
+  color: #666;
+  font-size: 11px;
+}
+
+footer span { color: var(--red); }
+
+@media(max-width: 768px) {
+  nav { padding: 0 5%; }
+  .menu-btn { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    background: #0b0b0b;
+    flex-direction: column;
+    padding: 25px;
+    border-bottom: 1px solid #502020;
+  }
+  .nav-links.active { display: flex; }
+  section { padding: 95px 7%; }
+  .about-grid, .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid, .lab-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 480px) {
+  .skills-grid, .lab-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<nav>
+  <a href="#home" class="logo">CRZ<span>_</span>ALGORISM</a>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">HOME</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#lab">CYBER LAB</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
+  <div class="hero-content">
+
+    <div class="tag">
+      [ SYSTEM ONLINE ] — WELCOME TO MY DIGITAL WORLD
+    </div>
+
+    <h1>CRZ_<span>ALGORISM</span></h1>
+
+    <h2>
+      <span id="typing"></span><span class="cursor"></span>
+    </h2>
+
+    <p>
+      Transforming ideas into code, data into intelligence,
+      and technology into solutions. Exploring the digital
+      world through programming, web development,
+      data analytics, Linux and cybersecurity.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-head">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+
+      <p>root@crz-algorism:~# whoami</p>
+      <p class="white">CRZ_Algorism</p>
+      <p>root@crz-algorism:~# cat mission.txt</p>
+      <p class="white">Code. Analyze. Secure. Innovate.</p>
+      <p>root@crz-algorism:~# <span class="cursor"></span></p>
+    </div>
+
+    <div class="buttons">
+      <a href="#projects" class="btn primary">VIEW PROJECTS</a>
+      <a href="#contact" class="btn">CONTACT ME</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2 class="section-title">ABOUT <span>ME</span></h2>
+  <p class="subtitle">// WHO AM I IN THE DIGITAL WORLD?</p>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Hello! I am <strong>CRZ_Algorism</strong>, a technology
+        enthusiast passionate about software development,
+        programming, data analysis and cybersecurity.
+      </p>
+      <br>
+      <p>
+        I enjoy building digital solutions, exploring
+        programming languages, understanding data patterns,
+        and learning how computer systems work.
+      </p>
+      <br>
+      <p>
+        My philosophy:
+        <strong>"Think logically, code efficiently,
+        analyze intelligently, and secure everything."</strong>
+      </p>
+    </div>
+
+    <div class="info-card">
+      <h3>// PROFILE INFORMATION</h3>
+      <p>USERNAME : CRZ_Algorism</p>
+      <p>ROLE : Developer & Programmer</p>
+      <p>FIELD : Data Analytics</p>
+      <p>INTEREST : Cybersecurity</p>
+      <p>ENVIRONMENT : Linux / Red Hat</p>
+      <p>STATUS : Always Learning</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2 class="section-title">TECH <span>STACK</span></h2>
+  <p class="subtitle">// TOOLS, LANGUAGES AND TECHNOLOGIES</p>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">🐍</div>
+      <h3>Python</h3>
+      <p>Programming, automation and data processing.</p>
+      <div class="skill-bar"><div style="width:80%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>HTML / CSS / JS</h3>
+      <p>Web development and interactive interfaces.</p>
+      <div class="skill-bar"><div style="width:85%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <h3>Data Analytics</h3>
+      <p>Data cleaning, visualization and insights.</p>
+      <div class="skill-bar"><div style="width:75%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🐧</div>
+      <h3>Linux / Red Hat</h3>
+      <p>Linux environment, shell and system administration.</p>
+      <div class="skill-bar"><div style="width:75%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🔐</div>
+      <h3>Cybersecurity</h3>
+      <p>Security fundamentals and ethical hacking.</p>
+      <div class="skill-bar"><div style="width:65%"></div></div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <h3>SQL / Database</h3>
+      <p>Database management and data querying.</p>
+      <div class="skill-bar"><div style="width:75%"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 class="section-title">MY <span>PROJECTS</span></h2>
+  <p class="subtitle">// SELECTED DIGITAL WORKS</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <small>[ WEB DEVELOPMENT ]</small>
+      <h3>01. Web Application</h3>
+      <p>
+        Developing modern web applications with responsive
+        interfaces and efficient functionality.
+      </p>
+      <a class="project-link" href="https://github.com/CRZ-Algorism">
+        VIEW SOURCE →
+      </a>
+    </div>
+
+    <div class="project-card">
+      <small>[ DATA ANALYTICS ]</small>
+      <h3>02. Data Intelligence</h3>
+      <p>
+        Exploring datasets, performing analysis,
+        and transforming raw data into useful insights.
+      </p>
+      <a class="project-link" href="https://github.com/CRZ-Algorism">
+        VIEW SOURCE →
+      </a>
+    </div>
+
+    <div class="project-card">
+      <small>[ PROGRAMMING ]</small>
+      <h3>03. Python Automation</h3>
+      <p>
+        Building Python scripts for automation,
+        data processing and productivity.
+      </p>
+      <a class="project-link" href="https://github.com/CRZ-Algorism">
+        VIEW SOURCE →
+      </a>
+    </div>
+
+    <div class="project-card">
+      <small>[ CYBERSECURITY ]</small>
+      <h3>04. Security Research</h3>
+      <p>
+        Learning network security, Linux tools,
+        system hardening and security testing
+        in authorized environments.
+      </p>
+      <a class="project-link" href="https://github.com/CRZ-Algorism">
+        VIEW SOURCE →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CYBER LAB -->
+<section id="lab">
+  <h2 class="section-title">CYBER <span>LAB</span></h2>
+  <p class="subtitle">// EXPLORE • EXPERIMENT • LEARN • SECURE</p>
+
+  <div class="lab-grid">
+
+    <div class="lab-card">
+      <div class="icon">🐧</div>
+      <h3>Linux Lab</h3>
+      <p>Linux commands, Bash scripting and system administration.</p>
+    </div>
+
+    <div class="lab-card">
+      <div class="icon">🛡️</div>
+      <h3>Security Lab</h3>
+      <p>Defensive security, system hardening and authorized testing.</p>
+    </div>
+
+    <div class="lab-card">
+      <div class="icon">⌨️</div>
+      <h3>Code Lab</h3>
+      <p>Programming experiments, algorithms and automation.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <h2 class="section-title">LET'S <span>CONNECT</span></h2>
+
+    <p>
+      Interested in technology, programming, data,
+      or cybersecurity? Let's build something meaningful.
+    </p>
+
+    <div class="socials">
+      <a href="https://github.com/CRZ-Algorism" target="_blank">GITHUB</a>
+      <a href="https://www.linkedin.com/" target="_blank">LINKEDIN</a>
+      <a href="mailto:your-email@example.com">EMAIL</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    © 2026 <span>CRZ_Algorism</span> |
+    Built with Code, Logic & Passion.
+  </p>
+  <p style="margin-top:10px">
+    [ ACCESS GRANTED ] — KEEP LEARNING. KEEP BUILDING.
+  </p>
+</footer>
+
+<script>
+// TYPING ANIMATION
+const roles = [
+  "Web Developer",
+  "Programmer",
+  "Data Analyst",
+  "Cybersecurity Enthusiast",
+  "Linux Explorer"
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeEffect() {
+  const current = roles[roleIndex];
+  document.getElementById("typing").textContent =
+    current.substring(0, charIndex);
+
+  if (!deleting && charIndex < current.length) {
+    charIndex++;
+    setTimeout(typeEffect, 90);
+  } else if (!deleting) {
+    deleting = true;
+    setTimeout(typeEffect, 1300);
+  } else if (charIndex > 0) {
+    charIndex--;
+    setTimeout(typeEffect, 45);
+  } else {
+    deleting = false;
+    roleIndex = (roleIndex + 1) % roles.length;
+    setTimeout(typeEffect, 300);
+  }
+}
+
+typeEffect();
+
+// MOBILE MENU
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("active");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("active");
+  });
+});
+
+// MATRIX EFFECT
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+let width, height, columns, drops;
+
+function resizeMatrix() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  columns = Math.floor(width / 18);
+  drops = Array(columns).fill(1);
+}
+
+resizeMatrix();
+window.addEventListener("resize", resizeMatrix);
+
+const characters = "01CRZALGORISM{}[]<>";
+
+function drawMatrix() {
+  ctx.fillStyle = "rgba(8,8,8,0.08)";
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.fillStyle = "#ff2020";
+  ctx.font = "13px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const char = characters[
+      Math.floor(Math.random() * characters.length)
+    ];
+
+    ctx.fillText(char, i * 18, drops[i] * 18);
+
+    if (drops[i] * 18 > height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+
+    drops[i]++;
+  }
+}
+
+setInterval(drawMatrix, 50);
+</script>
+
+</body>
+</html>
